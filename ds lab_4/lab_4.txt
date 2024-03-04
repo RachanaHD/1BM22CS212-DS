@@ -1,0 +1,128 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+int data;
+struct Node *next;
+};
+struct Node *head;
+void insert_begin()
+{
+struct Node *ptr;
+int n;
+ptr=(struct Node *)malloc(sizeof(struct Node));
+if(ptr==NULL)
+{
+printf("\nOverflow");
+}
+else
+{
+printf("Enter value: ");
+19| Page
+scanf("%d",&n);
+ptr->data=n;
+ptr->next=head;
+head=ptr;
+}
+}
+void insert_end()
+{
+struct Node *ptr, *temp;
+int n;
+ptr=(struct Node*)malloc(sizeof(struct Node));
+if(ptr==NULL)
+{
+printf("\nOverflow");
+}
+else
+{
+printf("Enter value: ");
+scanf("%d",&n);
+ptr->data=n;
+if(head==NULL)
+{
+ptr->next=NULL;
+head=ptr;
+}
+else
+{
+20| Page
+temp=head;
+while(temp->next!=NULL)
+temp=temp->next;
+temp->next=ptr;
+ptr->next=NULL;
+}
+}
+}
+void insert_random()
+{
+int i, loc, n;
+struct Node *ptr, *temp;
+ptr=(struct Node*)malloc(sizeof(struct Node));
+if(ptr==NULL)
+{
+printf("\nOverflow");
+}
+else
+{
+printf("Enter value: ");
+scanf("%d",&n);
+ptr->data=n;
+printf("Enter position: ");
+scanf("%d",&loc);
+if(loc == 0)
+{
+ptr->next = head;
+21| Page
+head = ptr;
+return;
+}
+temp=head;
+for(i=0; i<loc-1; i++)
+{
+if(temp==NULL)
+{
+printf("Cannot insert at position\n");
+return;
+}
+temp=temp->next;
+}
+ptr->next=temp->next;
+temp->next=ptr;
+}
+}
+void display()
+{
+struct Node * ptr;
+ptr=head;
+printf("List is: ");
+while(ptr!=NULL)
+{
+printf("%d\t", ptr->data);
+ptr=ptr->next;
+}
+22| Page
+printf("\n");
+}
+int main()
+{
+int ch=0;
+while(1)
+{
+printf("Enter your choice:\n1.Insert at the beginning \n2.Insert at the end \n3.Insert at
+specified position\n4.Display\n5.Exit\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:insert_begin(); break;
+case 2:insert_end(); break;
+case 3:insert_random(); break;
+case 4:display(); break;
+case 5:{
+printf("Name: RACHANA H D\tUSN:1BM22CS212");
+exit(0);
+}
+}
+}return 0;
+}

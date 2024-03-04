@@ -1,0 +1,128 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+int data;
+struct Node *next;
+};
+struct Node *head;
+void insert_begin(int n)
+{
+struct Node *ptr;
+ptr=(struct Node *)malloc(sizeof(struct Node));
+if(ptr==NULL)
+{
+printf("\nOverflow");
+}
+else
+{
+ptr->data=n;
+ptr->next=head;
+head=ptr;
+}
+29| Page
+}
+void delete_begin()
+{
+struct Node *ptr;
+if(head==NULL)
+{
+printf("List is empty\n");
+}
+else
+{
+ptr=head;
+head=ptr->next;
+free(ptr);
+printf("Deleted at the start\n");
+}
+}
+void delete_end()
+{
+struct Node *ptr,*ptr1;
+if(head == NULL)
+{
+printf("List is empty\n");
+}
+else if(head -> next == NULL)
+{
+free(head);
+30| Page
+head = NULL;
+printf("Only node of the list deleted\n");
+}
+else
+{
+ptr = head;
+while(ptr->next != NULL)
+{
+ptr1 = ptr;
+ptr = ptr ->next;
+}
+ptr1->next = NULL;
+free(ptr);
+printf("Deleted Node from the last\n");
+}
+}
+void delete_specified()
+{
+struct Node *ptr, *ptr1;
+int loc,i;
+printf("Enter position: ");
+scanf("%d",&loc);
+ptr=head;
+for(i=0;i<loc;i++)
+{
+ptr1 = ptr;
+ptr = ptr->next;
+31| Page
+if(ptr == NULL)
+{
+printf("There are less than %d elements in the list\n",loc);
+return;
+}
+}
+ptr1 ->next = ptr ->next;
+free(ptr);
+printf("Deleted %d node\n",loc);
+}
+void display()
+{
+struct Node * ptr;
+ptr=head;
+printf("List is: ");
+while(ptr!=NULL)
+{
+printf("%d\t", ptr->data);
+ptr=ptr->next;
+}
+printf("\n");
+}
+int main()
+{
+insert_begin(8);
+insert_begin(10);
+insert_begin(12);
+32| Page
+insert_begin(14);
+insert_begin(16);
+display();
+int ch=0;
+while(1)
+{
+printf("Enter your choice:\n1.Delete at the beginning \n2.Delete at End\n3.Delete at
+specified position \n4.Display\n5.Exit\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:delete_begin(); display(); break;
+case 2:delete_end(); display(); break;
+case 3:delete_specified(); display(); break;
+case 4:display(); break;
+case 5:{
+printf("Name: RACHANA H D\tUSN:1BM22CS212");
+exit(0);
+}
+}
+}return 0;
+}

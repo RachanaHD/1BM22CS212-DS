@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TABLE_SIZE 100 // Size of hash table
+#define EMPTY -1 // Indicates empty cell in hash table
+// Employee structure
+struct Employee {
+int key; // Unique key
+// Add other employee data here
+};
+// Hash table structure
+struct HashTable {
+struct Employee* table[TABLE_SIZE];
+};
+// Hash function using remainder method
+int hash(int key, int m) {
+70| Page
+return key % m;
+}
+// Function to initialize hash table
+void initHashTable(struct HashTable* ht) {
+for (int i = 0; i < TABLE_SIZE; i++) {
+ht->table[i] = NULL;
+}
+}
+// Function to insert employee record into hash table
+void insert(struct HashTable* ht, struct Employee* emp) {
+int index = hash(emp->key, TABLE_SIZE);
+// Linear probing to resolve collisions
+while (ht->table[index] != NULL && ht->table[index]->key != EMPTY) {
+index = (index + 1) % TABLE_SIZE;
+}
+ht->table[index] = emp;
+}
+// Function to search for an employee record using key
+struct Employee* search(struct HashTable* ht, int key) {
+int index = hash(key, TABLE_SIZE);
+71| Page
+while (ht->table[index] != NULL) {
+if (ht->table[index]->key == key) {
+return ht->table[index];
+}
+index = (index + 1) % TABLE_SIZE;
+}
+return NULL; // Employee not found
+}
+// Function to display hash table contents
+void displayHashTable(struct HashTable* ht) {
+printf("Hash Table:\n");
+for (int i = 0; i < TABLE_SIZE; i++) {
+if (ht->table[i] != NULL && ht->table[i]->key != EMPTY) {
+printf("Index %d: Key %d\n", i, ht->table[i]->key);
+} else {
+printf("Index %d: Empty\n", i);
+}
+}
+}
+int main() {
+struct HashTable ht;
+72| Page
+initHashTable(&ht);
+// Example employee records
+struct Employee emp1 = {1234}; // Key: 1234
+struct Employee emp2 = {5678}; // Key: 5678
+// Insert employee records into hash table
+insert(&ht, &emp1);
+insert(&ht, &emp2);
+// Display hash table
+displayHashTable(&ht);
+// Search for an employee
+int keyToSearch = 1234;
+struct Employee* foundEmp = search(&ht, keyToSearch);
+if (foundEmp != NULL) {
+printf("\nEmployee found with key %d\n", foundEmp->key);
+} else {
+printf("\nEmployee with key %d not found\n", keyToSearch);
+}
+return 0;
+}

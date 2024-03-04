@@ -1,0 +1,137 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+int data;
+struct node *next;
+};
+/* Stack implementation */
+void PUSH(struct node **head) {
+struct node *node = (struct node*)malloc(sizeof(struct node));
+int n;
+if (node == NULL) {
+printf("Overflow\n");
+}
+else {
+printf("Enter value: ");
+scanf("%d", &n);
+node->data = n;
+node->next = *head;
+*head = node;
+}
+43| Page
+}
+void POP(struct node **head) {
+struct node *node;
+if (*head == NULL) {
+printf("Stack is empty\n");
+}
+else {
+node = *head;
+*head = node->next;
+free(node);
+printf("Node deleted\n");
+}
+}
+/* Queue implementation */
+void enqueue(struct node **head) {
+struct node *node = (struct node*)malloc(sizeof(struct node));
+int n;
+if (node == NULL) {
+printf("Overflow\n");
+}
+else {
+printf("Enter value: ");
+scanf("%d", &n);
+node->data = n;
+44| Page
+node->next = NULL;
+if (*head == NULL) {
+*head = node;
+}
+else {
+struct node *t;
+t = *head;
+while (t->next != NULL) {
+t = t->next;
+}
+t->next = node;
+}
+}
+}
+void dequeue(struct node **head) {
+struct node *node;
+if (*head == NULL) {
+printf("Queue is empty\n");
+}
+else {
+node = *head;
+*head = node->next;
+free(node);
+printf("Node deleted\n");
+}
+}
+45| Page
+void display(struct node *head) {
+struct node *ptr;
+ptr = head;
+printf("List is: ");
+while (ptr != NULL) {
+printf("%d\t", ptr->data);
+ptr = ptr->next;
+}
+printf("\n");
+}
+int main() {
+struct node *head1 = NULL, *head2 = NULL;
+int ch;
+while (1) {
+printf("Enter your choice:\n1.Stack implementation\n2.Queue
+implementation\n3.Exit\n");
+scanf("%d", &ch);
+switch (ch) {
+case 1: {
+printf("Enter no. of elements: ");
+int n, i, c;
+scanf("%d", &n);
+for (i = 0; i < n; i++)
+PUSH(&head1);
+display(head1);
+46| Page
+printf("Do you wish to perform POP operation?(1/0)\n");
+scanf("%d", &c);
+if (c == 1) {
+printf("No. of elements to remove: ");
+scanf("%d", &n);
+for (i = 0; i < n; i++)
+POP(&head1);
+display(head1);
+}
+}
+break;
+case 2: {
+printf("Enter no. of elements: ");
+int n, i, c;
+scanf("%d", &n);
+for (i = 0; i < n; i++)
+enqueue(&head2);
+display(head2);
+printf("Do you wish to perform dequeue operation?(1/0)\n");
+scanf("%d", &c);
+if (c == 1) {
+printf("No. of elements to remove: ");
+scanf("%d", &n);
+for (i = 0; i < n; i++)
+dequeue(&head2);
+display(head2);
+}
+47| Page
+}
+break;
+case 3: {
+printf("Name:RACHANA H D \tUSN:1BM22CS212");
+exit(0);
+}
+}
+}
+return 0;
+}
